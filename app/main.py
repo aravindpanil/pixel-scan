@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Configuration variables
 samples_dir = Path("app/samples")
-image_filename = "Glas.jpg"
+image_filename = "Glass.jpg"
 
 # Get EXIF data 
 def get_exif_data(image):
@@ -14,6 +14,9 @@ def get_exif_data(image):
     for tag_id, value in exifdata.items():
         tag = TAGS.get(tag_id, tag_id)
         readable_exif[tag] = value
+    
+    readable_exif["width"] = image.width
+    readable_exif["height"] = image.height
     
     return readable_exif
 
