@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: pixelscan
-        image: disgruntledjarl/pixel-scan:latest
+        image: disgruntledjarl/pixel-scan:gunicorn_sync4
         ports:
         - containerPort: 5000
         resources:

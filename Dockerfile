@@ -25,5 +25,5 @@ COPY . .
 # Expose Flask port
 EXPOSE 5000
 
-# Run app using gunicorn (Worker is 2 x vCPU + 1)
-CMD ["gunicorn", "-w", "5", "-k", "sync", "-b", "0.0.0.0:5000", "main:app"]
+# Run app using Flask
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:5000", "--workers", "5", "--timeout", "30", "--max-requests", "1000", "--max-requests-jitter", "50"]
