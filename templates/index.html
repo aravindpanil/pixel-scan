@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Metadata Viewer</title>
+</head>
+<body>
+  <h1>Image Metadata Extractor</h1>
+
+  <!-- Single Upload Form -->
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required>
+    <button type="submit">Upload Image</button>
+  </form>
+
+  <!-- Show Metadata if available -->
+  {% if metadata %}
+    <hr>
+    <h2>Extracted Metadata</h2>
+    <ul>
+      {% for tag, value in metadata.items() %}
+        <li><strong>{{ tag }}:</strong> {{ value }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</body>
+</html>
