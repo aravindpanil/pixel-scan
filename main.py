@@ -24,3 +24,7 @@ def index():
 
     # Use Template
     return render_template("index.html", metadata=metadata, filename=filename)
+
+# Run app when Docker runs Python
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
