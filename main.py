@@ -1,5 +1,6 @@
 # Imoort packages
 from flask import Flask, request, render_template
+import socket
 
 # Import utils which contains metadata extractor method
 from app import utils
@@ -12,6 +13,9 @@ app = Flask(__name__)
 def index():
     metadata = {}
     filename = None
+     
+    # This gets the pod ID
+    hostname = socket.gethostname() 
     
     if request.method == 'POST':
         if 'image' not in request.files:
@@ -23,7 +27,7 @@ def index():
             metadata = utils.get_exif_data(file.stream)
 
     # Use Template
-    return render_template("index.html", metadata=metadata, filename=filename)
+    return render_template("index.html", metadata=metadata, filename=filename, hostname=hostname)
 
 # Run app when Docker runs Python
 if __name__ == "__main__":
