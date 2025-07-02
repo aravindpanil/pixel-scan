@@ -70,5 +70,24 @@
   fetchCPUUsage();  // Initial call
 </script>
 
+<div class="text-center mt-4">
+  <button id="burn-btn" class="btn btn-danger me-2">🔥 Start CPU Burn</button>
+  <button id="stop-btn" class="btn btn-secondary">🛑 Stop CPU Burn</button>
+</div>
+
+<script>
+  document.getElementById("burn-btn").addEventListener("click", function () {
+    fetch('/start-cpu-burn', { method: 'POST' })
+      .then(res => res.json())
+      .then(data => alert(data.status || data.error));
+  });
+
+  document.getElementById("stop-btn").addEventListener("click", function () {
+    fetch('/stop-cpu-burn', { method: 'POST' })
+      .then(res => res.json())
+      .then(data => alert(data.status || data.error));
+  });
+</script>
+
 </body>
 </html>
