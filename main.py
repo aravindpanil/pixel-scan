@@ -1,6 +1,7 @@
 # Imoort packages
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import socket
+import psutil
 
 # Import utils which contains metadata extractor method
 from app import utils
@@ -15,7 +16,7 @@ def index():
     filename = None
      
     # This gets the pod ID
-    hostname = socket.gethostname() 
+    hostname = socket.gethostname()
     
     if request.method == 'POST':
         if 'image' not in request.files:
@@ -28,6 +29,11 @@ def index():
 
     # Use Template
     return render_template("index.html", metadata=metadata, filename=filename, hostname=hostname)
+
+@app.route('/cpu')
+def cpu_usage():
+    usage = psutil.cpu_percent(interval=0.5)
+    return jsonify({"cpu": usage})
 
 # Run app when Docker runs Python
 if __name__ == "__main__":
