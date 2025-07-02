@@ -32,8 +32,8 @@ def index():
 
 @app.route('/cpu')
 def cpu_usage():
-    usage = psutil.cpu_percent(interval=0.5)
-    return jsonify({"cpu": usage})
+     usage = psutil.cpu_percent(interval=0.5)
+     return jsonify({"cpu": usage})
 
 # Run app when Docker runs Python
 if __name__ == "__main__":

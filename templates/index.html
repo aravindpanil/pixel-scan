@@ -41,9 +41,10 @@
 
   </div>
 
-  <!-- Add inside <body> just above or below your container -->
-<div class="container my-4">
-  <h5>CPU Utilization: <span id="cpu-value">0</span>%</h5>
+  <div class="container my-4">
+  <h5>CPU Utilization of <code>{{ hostname }}</code></h5>
+
+  <h6><span id="cpu-value">0</span>%</h6>
   <div class="progress">
     <div id="cpu-bar" class="progress-bar bg-danger" role="progressbar" 
          style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -51,8 +52,7 @@
   </div>
 </div>
 
-<!-- Add this at the bottom of the body to fetch and update CPU usage -->
-<script>
+  <script>
   function fetchCPUUsage() {
     fetch('/cpu')
       .then(response => response.json())
@@ -65,16 +65,10 @@
       })
       .catch(err => console.error("Error fetching CPU usage:", err));
   }
-
-  // Poll every 2 seconds
-  setInterval(fetchCPUUsage, 2000);
+// Poll every 2 seconds
+  setInterval(fetchCPUUsage, 1000);
   fetchCPUUsage();  // Initial call
 </script>
-
-
-  <div style="font-size: 0.8rem; color: gray;">
-    Served by pod: {{ hostname }}
-  </div>
 
 </body>
 </html>
