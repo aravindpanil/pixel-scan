@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: pixelscan
-        image: disgruntledjarl/pixel-scan:2.4
+        image: disgruntledjarl/pixel-scan:3
         ports:
         - containerPort: 5000
         resources:
