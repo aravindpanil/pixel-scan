@@ -42,45 +42,48 @@
   </div>
 
   <div class="container my-4">
-  <h5>CPU Utilization of <code>{{ hostname }}</code></h5>
+    <h5>CPU Utilization of <code>{{ hostname }}</code></h5>
 
-  <h6><span id="cpu-value">0</span>%</h6>
-  <div class="progress">
-    <div id="cpu-bar" class="progress-bar bg-danger" role="progressbar" 
-         style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <h6><span id="cpu-value">0</span>%</h6>
+    <div class="progress">
+      <div id="cpu-bar" class="progress-bar bg-danger" role="progressbar" style="width: 0%;" aria-valuenow="0"
+        aria-valuemin="0" aria-valuemax="100">
+      </div>
     </div>
   </div>
-</div>
 
   <script>
-  function fetchCPUUsage() {
-    fetch('/cpu')
-      .then(response => response.json())
-      .then(data => {
-        const cpu = data.cpu;
-        document.getElementById("cpu-value").textContent = cpu;
-        const bar = document.getElementById("cpu-bar");
-        bar.style.width = cpu + "%";
-        bar.setAttribute("aria-valuenow", cpu);
-      })
-      .catch(err => console.error("Error fetching CPU usage:", err));
-  }
-// Poll every 2 seconds
-  setInterval(fetchCPUUsage, 5000);
-  fetchCPUUsage();  // Initial call
-</script>
+    function fetchCPUUsage() {
+      fetch('/cpu')
+        .then(response => response.json())
+        .then(data => {
+          const cpu = data.cpu;
+          document.getElementById("cpu-value").textContent = cpu;
+          const bar = document.getElementById("cpu-bar");
+          bar.style.width = cpu + "%";
+          bar.setAttribute("aria-valuenow", cpu);
+        })
+        .catch(err => console.error("Error fetching CPU usage:", err));
+    }
 
-<div class="text-center mt-4">
-  <button id="burn-btn" class="btn btn-danger me-2">Start CPU Burn</button>
-</div>
+    // Poll every 5 seconds
+    setInterval(fetchCPUUsage, 5000);
 
-<script>
-  document.getElementById("burn-btn").addEventListener("click", function () {
-    fetch('/start-cpu-burn', { method: 'POST' })
-      .then(res => res.json())
-      .then(data => alert(data.status || data.error));
-  });
-</script>
+    // Initial Call
+    fetchCPUUsage();
+  </script>
 
+  <div class="text-center mt-4">
+    <button id="burn-btn" class="btn btn-danger me-2">Start CPU Burn</button>
+  </div>
+
+  <script>
+    document.getElementById("burn-btn").addEventListener("click", function () {
+      fetch('/start-cpu-burn', { method: 'POST' })
+        .then(res => res.json())
+        .then(data => alert(data.status || data.error));
+    });
+  </script>
 </body>
+
 </html>

@@ -13,9 +13,13 @@ spec:
     spec:
       containers:
       - name: pixelscan
-        image: disgruntledjarl/pixel-scan:3
+
+        # Image is already uploaded to public registry
+        image: disgruntledjarl/pixel-scan:3 
         ports:
         - containerPort: 5000
+
+        # Resource definition is based on Load testing
         resources:
           requests:
             cpu: "250m"
