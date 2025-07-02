@@ -66,7 +66,7 @@
       .catch(err => console.error("Error fetching CPU usage:", err));
   }
 // Poll every 2 seconds
-  setInterval(fetchCPUUsage, 1000);
+  setInterval(fetchCPUUsage, 5000);
   fetchCPUUsage();  // Initial call
 </script>
 
