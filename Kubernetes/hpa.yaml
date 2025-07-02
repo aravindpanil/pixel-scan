@@ -8,18 +8,25 @@ spec:
     kind: Deployment
     name: pixelscan-deployment
   minReplicas: 1
-  maxReplicas: 14
+  
+  # 3 pods can be put on a node as per load testing and node metrics
+  # Cluster autoscaling allows for 2 nodes, hence total of 6 pods
+  maxReplicas: 6
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 60
+        averageUtilization: 50
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: 30  # Wait for 15 seconds before acting on scale-down
+      
+      # Wait for 30 seconds before acting on scale-down
+      stabilizationWindowSeconds: 30  
+     
+      # Reduce 1 pod at most per 5 seconds
       policies:
       - type: Pods
-        value: 1                      # Reduce 1 pod at most per 5 seconds
+        value: 1                      
         periodSeconds: 15

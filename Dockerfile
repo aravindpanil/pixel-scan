@@ -26,4 +26,5 @@ COPY . .
 EXPOSE 5000
 
 # Run app using Flask
+# Worker Rule - 2 x No. of Nodes + 1
 CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:5000", "--workers", "5", "--timeout", "30", "--max-requests", "1000", "--max-requests-jitter", "50"]

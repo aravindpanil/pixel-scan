@@ -32,19 +32,23 @@ def index():
     return render_template("index.html", metadata=metadata, filename=filename, hostname=hostname)
 
 @app.route('/cpu')
+
+# Gets CPU Usage to display in a progress bar
 def cpu_usage():
      usage = psutil.cpu_percent(interval=0.1)
      return jsonify({"cpu": usage})
 
 @app.route('/start-cpu-burn', methods=['POST'])
+
+# Simulates CPU usage by running stress package
 def start_cpu_burn():
     try:
-        # Start stress in background
         subprocess.Popen(['stress', '--cpu', '1', '--timeout', '10'])
         return jsonify({'status': 'CPU burn started'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Run app when Docker runs Python
+# This is only used for local testing
+# Docker will run using gunicorn and not Flask defaults
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
