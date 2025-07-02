@@ -36,33 +36,14 @@ def cpu_usage():
      usage = psutil.cpu_percent(interval=0.1)
      return jsonify({"cpu": usage})
 
-stress_process = None  # Global handle to keep track of the process
-
 @app.route('/start-cpu-burn', methods=['POST'])
 def start_cpu_burn():
-    global stress_process
-    if stress_process and stress_process.poll() is None:
-        return jsonify({'status': 'Already running'})
-
     try:
         # Start stress in background
-        stress_process = subprocess.Popen(['stress', '--cpu', '1', '--timeout', '10'])
+        subprocess.Popen(['stress', '--cpu', '1', '--timeout', '10'])
         return jsonify({'status': 'CPU burn started'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-@app.route('/stop-cpu-burn', methods=['POST'])
-def stop_cpu_burn():
-    global stress_process
-    if stress_process and stress_process.poll() is None:
-        try:
-            stress_process.terminate()  # Send SIGTERM
-            stress_process.wait(timeout=5)
-            return jsonify({'status': 'CPU burn stopped'})
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
-    else:
-        return jsonify({'status': 'No CPU burn process running'})
 
 # Run app when Docker runs Python
 if __name__ == "__main__":
