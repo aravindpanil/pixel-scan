@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: pixelscan-deployment
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: pixelscan
@@ -14,7 +13,7 @@ spec:
     spec:
       containers:
       - name: pixelscan
-        image: disgruntledjarl/pixel-scan:2.2
+        image: disgruntledjarl/pixel-scan:2.3
         ports:
         - containerPort: 5000
         resources:
