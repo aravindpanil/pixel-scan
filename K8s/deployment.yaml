@@ -13,13 +13,13 @@ spec:
     spec:
       containers:
       - name: pixelscan
-        image: disgruntledjarl/pixel-scan:2.3
+        image: disgruntledjarl/pixel-scan:2.4
         ports:
         - containerPort: 5000
         resources:
           requests:
             cpu: "250m"
-            memory: "150Mi"
+            memory: "256Mi"
           limits:
             cpu: "500m"
-            memory: "300Mi"
+            memory: "512Mi"

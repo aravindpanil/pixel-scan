@@ -16,3 +16,10 @@ spec:
       target:
         type: Utilization
         averageUtilization: 60
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 30  # Wait for 15 seconds before acting on scale-down
+      policies:
+      - type: Pods
+        value: 1                      # Reduce 1 pod at most per 5 seconds
+        periodSeconds: 15
