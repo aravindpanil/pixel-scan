@@ -16,6 +16,7 @@ This is a lightweight Flask application designed for extracting EXIF metadata fr
 - Setup a cluster with autoscaling between 1 and 2 node
 - Choose the node pool with 2 vCPUs and 4 GB RAM per node
 - The cluster can also be configured using docli with different parameters. However, the values for autoscaling, gunicorn must be adjusted accordingly for optimal performance
+- Apply the configuration for the cluster on local kubectl setup by using docli or downloading the config and putting it under ~/.kube/config (The contents should be in a file called config)
 
 ### Step 2 - Docker Setup
 You can choose to use an image that is pre-built with default settings and directly launch this application or create your own image with custom instructions. For default setup, skip this step since the image is already available at the public registry - disgruntledjarl/pixelscan:latest
