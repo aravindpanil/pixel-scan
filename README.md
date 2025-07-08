@@ -20,7 +20,7 @@ Note - This can be done via the Digital Ocean UI or docli. The cluster resource 
 
 ### Step 2 - Docker Setup
 #### Option A - Use the default image
-You can choose to use an image that is pre-built with default settings and directly launch this application or create your own image with custom instructions. For default setup, skip this step since the image is already available at the public registry - disgruntledjarl/pixelscan:latest
+If you want to use the pre-built image, no further steps are required. The deployment is configured to be launched with the pre-built image - disgruntledjarl/pixelscan:latest. This image is hosted on Docker Registry and is a public image
 
 #### Option B - Modify the Docker Image
 - Modify the Dockerfile provided in the repository as per your requirements
