@@ -9,7 +9,7 @@ A lightweight Flask app that:
 
 ## Setup Instructions
 
-### Step 1 -Digital Ocean Kubernetes Setup
+### Step 1 - Digital Ocean Kubernetes Setup
 
 Note - This can be done via the Digital Ocean UI or docli. The cluster resource values have been decided after load testing and set in accordance with gunicorn configuration in Flask
 
